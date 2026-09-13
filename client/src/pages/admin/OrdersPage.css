@@ -1,0 +1,289 @@
+.orders-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* View Mode Switcher */
+.view-mode-toggle {
+  display: flex;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2px;
+}
+
+.view-mode-btn {
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.view-mode-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.view-mode-btn--active {
+  background: var(--color-terracotta);
+  color: white !important;
+}
+
+/* Table Wrap — Overflow Scroll */
+.orders-table-wrap {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 800px;
+}
+
+.orders-table thead tr {
+  background: var(--color-beige);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.orders-table th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.orders-table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-fast);
+}
+
+.orders-table tbody tr:last-child { border-bottom: none; }
+.orders-table tbody tr:hover { background: var(--color-surface-2); }
+
+.orders-table td {
+  padding: var(--space-3) var(--space-4);
+  vertical-align: middle;
+}
+
+/* Order Number */
+.order-num {
+  font-family: monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+/* Customer */
+.order-customer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.order-customer__name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.order-customer__phone,
+.order-customer__addr {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Type */
+.order-type-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* Items */
+.order-items-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.order-item-tag {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.order-item-more {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Total */
+.order-total {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* Time */
+.order-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.order-date {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* Delete Button */
+.btn-delete-order {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border: 1px solid rgba(192, 57, 43, 0.3);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-delete-order:hover {
+  background: var(--color-error);
+  color: white;
+  border-color: var(--color-error);
+}
+
+/* Card Grid View */
+.orders-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-5);
+}
+
+.admin-order-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.admin-order-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.admin-order-card--received { border-top: 4px solid var(--color-info); }
+.admin-order-card--preparing { border-top: 4px solid var(--color-warning); }
+.admin-order-card--ready { border-top: 4px solid var(--color-gold); }
+.admin-order-card--out-for-delivery { border-top: 4px solid #1e6a41; }
+.admin-order-card--completed { border-top: 4px solid var(--color-success); }
+.admin-order-card--cancelled { border-top: 4px solid var(--color-error); opacity: 0.75; }
+
+.admin-order-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-3);
+}
+
+.order-card-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.admin-order-card__customer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.admin-order-card__items {
+  background: var(--color-beige);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+}
+
+.admin-order-item {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-secondary);
+}
+
+.admin-order-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.admin-order-card__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.status-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (max-width: 600px) {
+  .orders-cards-grid { grid-template-columns: 1fr; }
+  .orders-controls { width: 100%; justify-content: space-between; }
+}

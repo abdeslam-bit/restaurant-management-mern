@@ -1,0 +1,103 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  position: relative;
+}
+
+/* Header Bar */
+.admin-header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 400;
+  padding: 0 var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(12px);
+  transition: padding-left var(--transition-base);
+}
+
+.admin-header-toggle,
+.admin-header-theme {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.admin-header-toggle:hover,
+.admin-header-theme:hover {
+  border-color: var(--color-terracotta);
+  color: var(--color-terracotta);
+}
+
+.admin-header-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.admin-layout__main {
+  flex: 1;
+  min-width: 0;
+  padding: calc(60px + var(--space-6)) var(--space-8) var(--space-8);
+  min-height: 100vh;
+  transition: margin-left var(--transition-base), padding var(--transition-base);
+}
+
+/* Desktop layout with sidebar open */
+@media (min-width: 900px) {
+  .admin-layout--sidebar-open .admin-layout__main {
+    margin-left: 260px;
+  }
+  .admin-layout--sidebar-open .admin-header-bar {
+    padding-left: calc(260px + var(--space-6));
+  }
+}
+
+.admin-sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .admin-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 450;
+    animation: fadeIn 0.2s ease;
+  }
+  .admin-layout__main {
+    margin-left: 0 !important;
+    padding: calc(60px + var(--space-4)) var(--space-4) var(--space-8);
+  }
+  .admin-header-bar {
+    padding: 0 var(--space-4) !important;
+  }
+}

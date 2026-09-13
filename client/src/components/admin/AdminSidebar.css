@@ -1,0 +1,269 @@
+.admin-sidebar {
+  width: 260px;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 500;
+  border-right: 1px solid var(--color-border);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-100%);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+.admin-sidebar--open {
+  transform: translateX(0) !important;
+}
+
+/* Logo */
+.admin-sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  height: 60px;
+}
+
+.admin-sidebar__logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-terracotta);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__logo-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.admin-sidebar__logo-tag {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Close Button (top right of sidebar) */
+.admin-sidebar__close-btn {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: all var(--transition-fast);
+}
+
+.admin-sidebar__close-btn:hover {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* Nav */
+.admin-sidebar__nav {
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-5) var(--space-3);
+  overflow-y: auto;
+}
+
+.admin-sidebar__nav-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 0 var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.admin-sidebar__nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.admin-nav-link:hover {
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+
+.admin-nav-link--active {
+  background: rgba(192, 83, 58, 0.12);
+  color: var(--color-terracotta);
+  font-weight: 600;
+  border: 1px solid rgba(192, 83, 58, 0.25);
+}
+
+.admin-nav-link--active .admin-nav-link__icon {
+  color: var(--color-terracotta);
+}
+
+.admin-nav-link__icon {
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+}
+
+.admin-nav-link__label { flex: 1; }
+
+.admin-nav-link__arrow {
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.admin-nav-link:hover .admin-nav-link__arrow,
+.admin-nav-link--active .admin-nav-link__arrow {
+  opacity: 1;
+}
+
+/* Footer */
+.admin-sidebar__footer {
+  padding: var(--space-4);
+  padding-bottom: max(var(--space-4), env(safe-area-inset-bottom, 16px));
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  margin-top: auto;
+  background: var(--color-surface);
+  z-index: 10;
+}
+
+.admin-sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-sidebar__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-terracotta), var(--color-gold));
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__user-info { min-width: 0; }
+
+.admin-sidebar__user-name {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-sidebar__user-role {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.admin-sidebar__logout {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--color-surface);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.admin-sidebar__logout:hover {
+  border-color: var(--color-terracotta);
+  color: var(--color-terracotta);
+}
+
+/* ── VS Code Style Resizer Handle ─────────────────────── */
+
+.admin-sidebar-resizer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -4px;
+  width: 8px;
+  cursor: col-resize;
+  z-index: 600;
+  background: transparent;
+}
+
+.admin-sidebar-resizer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 3px;
+  width: 2px;
+  background: transparent;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-sidebar-resizer:hover::after,
+.admin-sidebar-resizer--active::after {
+  background: var(--color-terracotta);
+  box-shadow: 0 0 8px rgba(192, 83, 58, 0.6);
+}
+
+.admin-sidebar--resizing {
+  user-select: none !important;
+  transition: none !important;
+}
+
+@media (max-width: 899px) {
+  .admin-sidebar-resizer {
+    display: none;
+  }
+}
