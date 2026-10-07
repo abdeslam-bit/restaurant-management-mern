@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UtensilsCrossed, Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import { UtensilsCrossed, Eye, EyeOff, Lock, Mail, Sun, Moon, ArrowLeft } from 'lucide-react';
 import { login } from '../../api/auth';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { useToast } from '../../context/ToastContext';
 import './AdminLoginPage.css';
 
@@ -12,13 +13,17 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { loginAdmin } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const toast = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!form.email || !form.password) { setError('Please enter your email and password.'); return; }
+    if (!form.email || !form.password) {
+      setError('Please enter your email and password.');
+      return;
+    }
     setLoading(true);
     try {
       const res = await login(form);
@@ -26,7 +31,7 @@ export default function AdminLoginPage() {
       toast.success(`Welcome back, ${res.data.admin.name}!`);
       navigate('/admin');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      setError(err.response?.data?.message || 'Invalid email or password.');
     } finally {
       setLoading(false);
     }
@@ -34,14 +39,30 @@ export default function AdminLoginPage() {
 
   return (
     <div className="admin-login-page">
+      {/* Top Navbar items */}
+      <div className="admin-login-nav">
+        <a href="/" className="admin-login-back">
+          <ArrowLeft size={16} /> Return to Guest Menu
+        </a>
+        <button
+          className="admin-login-theme-btn"
+          onClick={toggleTheme}
+          title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          id="admin-login-theme-toggle"
+        >
+          {isDark ? <Sun size={18} color="#d4a853" /> : <Moon size={18} />}
+          <span>{isDark ? 'Light' : 'Dark'}</span>
+        </button>
+      </div>
+
       <div className="admin-login-card fade-in-scale">
         {/* Header */}
         <div className="admin-login-card__header">
           <div className="admin-login-card__logo">
             <UtensilsCrossed size={24} />
           </div>
-          <h1 className="admin-login-card__title">Admin Portal</h1>
-          <p className="admin-login-card__subtitle">Sign in to manage your restaurant</p>
+          <h1 className="admin-login-card__title">Maison Admin</h1>
+          <p className="admin-login-card__subtitle">Sign in to access your dashboard</p>
         </div>
 
         {/* Form */}
@@ -49,7 +70,7 @@ export default function AdminLoginPage() {
           {error && (
             <div className="admin-login-error">
               <Lock size={14} />
-              {error}
+              <span>{error}</span>
             </div>
           )}
 
@@ -65,6 +86,7 @@ export default function AdminLoginPage() {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 autoComplete="email"
+                required
               />
             </div>
           </div>
@@ -81,12 +103,14 @@ export default function AdminLoginPage() {
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 autoComplete="current-password"
+                required
               />
               <button
                 type="button"
                 className="input-icon-btn"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
+                id="admin-login-toggle-pw"
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
@@ -95,20 +119,20 @@ export default function AdminLoginPage() {
 
           <button
             type="submit"
-            className="btn btn-primary btn-lg w-full"
+            className="btn btn-primary btn-lg w-full admin-login-submit"
             disabled={loading}
             id="admin-login-btn"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Authenticating...' : 'Sign In'}
           </button>
         </form>
 
         {/* Default Credentials Hint */}
         <div className="admin-login-hint">
-          <p className="admin-login-hint__title">Default Credentials</p>
+          <p className="admin-login-hint__title">Default Admin Credentials</p>
           <div className="admin-login-creds">
-            <span><strong>Email:</strong> admin@restaurant.com</span>
-            <span><strong>Password:</strong> Admin@123456</span>
+            <div><strong>Email:</strong> <code>admin@restaurant.com</code></div>
+            <div><strong>Password:</strong> <code>Admin@123456</code></div>
           </div>
         </div>
       </div>
